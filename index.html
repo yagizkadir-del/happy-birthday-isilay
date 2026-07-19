@@ -3,16 +3,476 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#100812">
+
     <title>İyi ki Doğdun Gabilim ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink: #ff86ad;
+            --light-pink: #ffd3e1;
+            --white: #fff9fc;
+            --muted: #d9ccd3;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 20% 15%, rgba(255, 75, 145, 0.16), transparent 32%),
+                radial-gradient(circle at 80% 80%, rgba(132, 67, 255, 0.15), transparent 35%),
+                linear-gradient(135deg, #08070c, #170914 55%, #08070c);
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.12;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 0.9;
+                transform: scale(1.4);
+            }
+        }
+
+        main {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 22px;
+        }
+
+        .card {
+            width: min(680px, 94vw);
+            min-height: 480px;
+            padding: 42px 30px;
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 30px;
+            background: rgba(255,255,255,0.055);
+            backdrop-filter: blur(18px);
+            box-shadow:
+                0 30px 100px rgba(0,0,0,0.55),
+                inset 0 1px 0 rgba(255,255,255,0.08);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+
+        .card.fade-out {
+            opacity: 0;
+            transform: translateY(14px) scale(0.98);
+        }
+
+        .small-title {
+            color: var(--pink);
+            letter-spacing: 3px;
+            font-size: 13px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            font-size: clamp(40px, 10vw, 78px);
+            line-height: 1.05;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, #ffffff, #ffc2d6, #ff77a6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        h2 {
+            font-size: clamp(28px, 7vw, 52px);
+            margin-bottom: 22px;
+            color: var(--light-pink);
+        }
+
+        #text {
+            max-width: 540px;
+            color: var(--muted);
+            font-size: clamp(18px, 4.6vw, 23px);
+            line-height: 1.7;
+            white-space: pre-line;
+        }
+
+        .heart-main {
+            font-size: 55px;
+            margin-bottom: 14px;
+            animation: pulse 1.6s infinite ease-in-out;
+            filter: drop-shadow(0 0 18px rgba(255, 75, 130, 0.45));
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.14);
+            }
+        }
+
+        .buttons {
+            margin-top: 34px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button, .music-link {
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 999px;
+            padding: 14px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.25s ease;
+        }
+
+        #nextButton {
+            color: white;
+            background: linear-gradient(135deg, #ff4f89, #c73974);
+            box-shadow: 0 12px 30px rgba(255, 60, 125, 0.25);
+        }
+
+        #nextButton:hover {
+            transform: translateY(-3px) scale(1.03);
+        }
+
+        .music-link {
+            display: none;
+            color: var(--white);
+            background: rgba(255,255,255,0.07);
+        }
+
+        .music-link:hover {
+            background: rgba(255,255,255,0.13);
+            transform: translateY(-3px);
+        }
+
+        .progress {
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(280px, 60%);
+            height: 4px;
+            background: rgba(255,255,255,0.10);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-inner {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff4f89, #ffb6cf);
+            transition: width 0.5s ease;
+        }
+
+        .floating-heart {
+            position: fixed;
+            z-index: 5;
+            bottom: -40px;
+            pointer-events: none;
+            animation: floatUp linear forwards;
+            filter: drop-shadow(0 0 6px rgba(255, 85, 140, 0.55));
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            12% {
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-115vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .signature {
+            margin-top: 24px;
+            color: var(--pink);
+            font-style: italic;
+            font-size: 17px;
+        }
+
+        @media (max-width: 520px) {
+            .card {
+                min-height: 520px;
+                padding: 34px 21px;
+                border-radius: 24px;
+            }
+
+            button, .music-link {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
-<body style="background:black;color:white;font-family:Arial;text-align:center;margin-top:200px;">
+<body>
 
-<h1>İyi ki Doğdun</h1>
+    <div id="stars"></div>
 
-<h2>Işılay ❤️</h2>
+    <main>
+        <section class="card" id="card">
+            <div class="heart-main" id="icon">❤️</div>
 
-<p>Dokun ve devam et...</p>
+            <div class="small-title" id="smallTitle">Gabilime özel</div>
 
+            <h1 id="heading">İyi ki doğdun</h1>
+
+            <h2 id="name">Işılay</h2>
+
+            <p id="text">
+                Sana söylemek istediğim birkaç şey var.
+                Hazırsan dokun…
+            </p>
+
+            <div class="buttons">
+                <button id="nextButton">Başlayalım ✨</button>
+
+                <a
+                    class="music-link"
+                    id="musicLink"
+                    href="https://www.youtube.com/results?search_query=Eypio+Ömrüm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Şarkımızı aç 🎵
+                </a>
+            </div>
+
+            <div class="signature" id="signature"></div>
+        </section>
+
+        <div class="progress">
+            <div class="progress-inner" id="progress"></div>
+        </div>
+    </main>
+
+    <script>
+        /*
+          KANKA KENDİ METİNLERİNİ BURADAN DEĞİŞTİREBİLİRSİN.
+          Her süslü parantez bir ekran demek.
+        */
+
+        const pages = [
+            {
+                icon: "🎮",
+                smallTitle: "Her şey bir oyunla başladı",
+                heading: "Güzel bir tesadüf",
+                name: "",
+                text: `League of Legends'ta aynı oyuna denk gelmemiz,
+belki de hayatımın en güzel tesadüflerinden biriydi.`,
+                button: "Devam et"
+            },
+
+            {
+                icon: "✨",
+                smallTitle: "Sonra",
+                heading: "Bir oyun olmaktan çıktı",
+                name: "",
+                text: `Seni tanıdıkça hayatımdaki yerin büyüdü.
+
+Uzakta olsan bile bana yakın hissettiren biri oldun.`,
+                button: "Devam et"
+            },
+
+            {
+                icon: "🤍",
+                smallTitle: "Sana dürüstçe",
+                heading: "Hata yaptım",
+                name: "",
+                text: `Doğum gününü kutlamamam yanlıştı.
+
+Öfkeli olmam bunu haklı çıkarmaz.
+Seni kırdığım için gerçekten üzgünüm.`,
+                button: "Devam et"
+            },
+
+            {
+                icon: "🌙",
+                smallTitle: "Bilmeni istediğim şey",
+                heading: "Sen değerlisin",
+                name: "",
+                text: `O gün yaptığım hata,
+sana verdiğim değeri anlatmıyor.
+
+Sen benim için gerçekten çok özelsin, gabilim.`,
+                button: "Devam et"
+            },
+
+            {
+                icon: "🎵",
+                smallTitle: "Bizim şarkımız",
+                heading: "Ömrüm",
+                name: "",
+                text: `Bu şarkıyı her duyduğumda aklıma sen geliyorsun.
+
+Bazı insanlar bir şarkı gibi hayatına girer
+ve sonra her yerde onları hatırlarsın.`,
+                button: "Bir tane daha"
+            },
+
+            {
+                icon: "🎂",
+                smallTitle: "Yeni yaşın",
+                heading: "19",
+                name: "",
+                text: `19 yaşın sana huzur, mutluluk,
+sağlık ve unutamayacağın güzellikler getirsin.
+
+Yüzün hep gülsün.`,
+                button: "Son mesaj"
+            },
+
+            {
+                icon: "❤️",
+                smallTitle: "Geç kaldım ama",
+                heading: "İyi ki doğdun",
+                name: "Işılay",
+                text: `Bu site seni affetmeye zorlamak için değil,
+seni ne kadar önemsediğimi göstermek için hazırlandı.
+
+İyi ki varsın, gabilim.`,
+                button: "Kalplere dokun ❤️",
+                final: true
+            }
+        ];
+
+        let currentPage = -1;
+        let finished = false;
+
+        const card = document.getElementById("card");
+        const icon = document.getElementById("icon");
+        const smallTitle = document.getElementById("smallTitle");
+        const heading = document.getElementById("heading");
+        const nameElement = document.getElementById("name");
+        const text = document.getElementById("text");
+        const nextButton = document.getElementById("nextButton");
+        const progress = document.getElementById("progress");
+        const musicLink = document.getElementById("musicLink");
+        const signature = document.getElementById("signature");
+
+        function createStars() {
+            const starsContainer = document.getElementById("stars");
+
+            for (let i = 0; i < 75; i++) {
+                const star = document.createElement("span");
+                star.className = "star";
+                star.style.left = Math.random() * 100 + "%";
+                star.style.top = Math.random() * 100 + "%";
+                star.style.animationDelay = Math.random() * 3 + "s";
+                star.style.animationDuration = 2 + Math.random() * 4 + "s";
+                starsContainer.appendChild(star);
+            }
+        }
+
+        function showNextPage() {
+            if (finished) {
+                createHeartRain();
+                return;
+            }
+
+            currentPage++;
+
+            card.classList.add("fade-out");
+
+            setTimeout(() => {
+                const page = pages[currentPage];
+
+                icon.textContent = page.icon;
+                smallTitle.textContent = page.smallTitle;
+                heading.textContent = page.heading;
+                nameElement.textContent = page.name;
+                text.textContent = page.text;
+                nextButton.textContent = page.button;
+
+                progress.style.width =
+                    ((currentPage + 1) / pages.length) * 100 + "%";
+
+                if (currentPage === 4) {
+                    musicLink.style.display = "inline-block";
+                } else {
+                    musicLink.style.display = "none";
+                }
+
+                if (page.final) {
+                    finished = true;
+                    signature.textContent = "— Yağız";
+                    createHeartRain();
+                }
+
+                card.classList.remove("fade-out");
+            }, 450);
+        }
+
+        function createHeartRain() {
+            const hearts = ["❤️", "🤍", "💗", "💕", "💖"];
+
+            for (let i = 0; i < 45; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement("div");
+                    heart.className = "floating-heart";
+                    heart.textContent =
+                        hearts[Math.floor(Math.random() * hearts.length)];
+
+                    heart.style.left = Math.random() * 100 + "vw";
+                    heart.style.fontSize = 16 + Math.random() * 28 + "px";
+                    heart.style.animationDuration =
+                        3.5 + Math.random() * 4 + "s";
+
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 8000);
+                }, i * 85);
+            }
+        }
+
+        nextButton.addEventListener("click", showNextPage);
+
+        createStars();
+    </script>
 </body>
 </html>
