@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#070812">
+  <meta name="description" content="Işılay için hazırlanmış küçük bir hikâye.">
+  <title>Gabilim 🤍</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <canvas id="hearts" aria-hidden="true"></canvas>
+  <div class="aurora aurora-one" aria-hidden="true"></div>
+  <div class="aurora aurora-two" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div id="loader" class="loader" role="status" aria-live="polite">
+    <div class="loader-heart">♡</div>
+    <p>Senin için hazırlanıyor…</p>
+  </div>
+
+  <main class="app" id="app">
+    <header class="topbar">
+      <button id="soundToggle" class="icon-btn" type="button" aria-label="Ses durumunu değiştir">♪</button>
+      <div class="progress"><span id="progressFill"></span></div>
+      <button id="secretButton" class="secret-btn" type="button">Buna basma</button>
+    </header>
+
+    <section class="scene active" data-scene="intro">
+      <div class="content hero">
+        <p class="eyebrow reveal">Gabilim</p>
+        <h1 class="display reveal">Sana göstermek istediğim<br><em>birkaç şey var.</em></h1>
+        <p class="lead reveal">Umarım sonuna kadar benimle gelirsin 🤍</p>
+        <button class="primary next reveal" type="button">Başlayalım <span>→</span></button>
+      </div>
+    </section>
+
+    <section class="scene" data-scene="music">
+      <div class="content narrow">
+        <article class="music-card reveal">
+          <div class="music-glow" aria-hidden="true"></div>
+          <div class="vinyl"><span>Ö</span></div>
+          <div>
+            <small>BİZİM ŞARKIMIZ</small>
+            <h2>Eypio · Ömrüm</h2>
+            <p>Bu şarkıyı buraya doğrudan koyamıyorum; ama tek dokunuşla dinleyebilirsin.</p>
+            <a class="spotify" href="https://open.spotify.com/search/Eypio%20%C3%96mr%C3%BCm" target="_blank" rel="noopener">Spotify’da aç ↗</a>
+          </div>
+        </article>
+        <button class="ghost next reveal" type="button">Devam et →</button>
+      </div>
+    </section>
+
+    <section class="scene league-scene" data-scene="league">
+      <div class="league-shell reveal">
+        <div class="league-bar">
+          <div class="league-logo">V</div>
+          <span>PLAY</span><span>HOME</span><span>TFT</span>
+          <i></i><small>ONLINE</small>
+        </div>
+        <div class="league-art">
+          <div class="rune rune-a"></div>
+          <div class="rune rune-b"></div>
+          <p>Bir gün aynı oyuna denk geldik.</p>
+        </div>
+
+        <article class="request-card" id="requestCard">
+          <div class="request-avatar"><span>V</span><i></i></div>
+          <div class="request-copy">
+            <small>ARKADAŞLIK İSTEĞİ</small>
+            <strong>Vespera</strong>
+            <p>sana arkadaşlık isteği gönderdi</p>
+          </div>
+          <div class="request-actions">
+            <button id="declineBtn" class="decline" type="button" aria-disabled="true">Reddet</button>
+            <button id="acceptBtn" class="accept" type="button">Kabul Et</button>
+          </div>
+        </article>
+
+        <div id="acceptedMessage" class="accepted-message">
+          <span>✓</span>
+          <p>Bunun hayatımda bu kadar güzel bir hikâyeye dönüşeceğini bilmiyordum.</p>
+          <strong>İyi ki atmışsın Gabilim 🤍</strong>
+        </div>
+      </div>
+      <button class="ghost next league-next" type="button">Hikâyeye devam et →</button>
+    </section>
+
+    <section class="scene" data-scene="notification">
+      <div class="content center">
+        <p class="eyebrow reveal">Günler geçti…</p>
+        <h2 class="statement reveal">Günümün en güzel<br><em>bildirimlerinden biri</em> oldun.</h2>
+        <div class="notifications reveal">
+          <article><span>V</span><p><b>Vespera</b><small>Kingo lol var mı</small></p><time>şimdi</time></article>
+          <article><span>♡</span><p><b>Gabilim</b><small>Buradayım</small></p><time>şimdi</time></article>
+        </div>
+        <button class="primary next reveal" type="button">Devam <span>→</span></button>
+      </div>
+    </section>
+
+    <section class="scene" data-scene="fourmonths">
+      <div class="content center">
+        <p class="giant-quote reveal">“Kingo lol var mı”</p>
+        <div class="timeline reveal"><span></span><b>4 AY</b><span></span></div>
+        <h2 class="statement reveal">Buraya geldik 🤍</h2>
+        <p class="lead reveal">Bazen hayatın en güzel hikâyeleri, en sıradan cümlelerle başlıyormuş.</p>
+        <button class="ghost next reveal" type="button">Anılarımıza bak →</button>
+      </div>
+    </section>
+
+    <section class="scene" data-scene="memories">
+      <div class="content wide">
+        <p class="eyebrow reveal">Küçük görünen, büyük kalan şeyler</p>
+        <h2 class="section-title reveal">Bizden birkaç anı.</h2>
+        <div class="memory-grid">
+          <article class="memory reveal"><span>01</span><h3>Aynı oyuna denk geldiğimiz gün</h3><p>Her şeyin başladığı o rastlantı.</p></article>
+          <article class="memory reveal"><span>02</span><h3>Kingo lol var mı</h3><p>Günün en güzel daveti.</p></article>
+          <article class="memory reveal"><span>03</span><h3>Gece konuşmaları</h3><p>Saatin nasıl geçtiğini anlamadığımız geceler.</p></article>
+          <article class="memory reveal"><span>04</span><h3>Lucian Yuumi Bot Lane</h3></article>
+          <article class="memory reveal"><span>05</span><h3>Birbirimizi dinlediğimiz, destek olduğumuz günler</h3><p>En çok da bunları seviyorum.</p></article>
+        </div>
+        <button class="ghost next reveal" type="button">Devam et →</button>
+      </div>
+    </section>
+
+    <section class="scene" data-scene="echo">
+      <div class="content center">
+        <p class="eyebrow reveal">Şimdi düşününce…</p>
+        <h2 class="statement reveal">Tek bir istek<br><em>yeterli oluyormuş.</em></h2>
+        <div class="echo-card reveal"><span>V</span><div><small>ARKADAŞLIK İSTEĞİ</small><b>Vespera</b></div><i>✓</i></div>
+        <p class="lead reveal">İyi ki kabul etmişim 🤍</p>
+        <button class="primary next reveal" type="button">Bir şey daha var <span>→</span></button>
+      </div>
+    </section>
+
+    <section class="scene" data-scene="snail">
+      <div class="content center">
+        <button id="snail" class="snail reveal" type="button" aria-label="Salyangoza dokun">🐌</button>
+        <h2 class="statement reveal">Sümüklü böceği bile<br>bu kadar düşünen…</h2>
+        <p class="lead reveal">İyi yürekli bebeğim.</p>
+        <button class="ghost next reveal" type="button">Devam et →</button>
+      </div>
+    </section>
+
+    <section class="scene" data-scene="apology">
+      <div class="content narrow">
+        <p class="eyebrow reveal">Bir de bunu söylemek istiyorum</p>
+        <article class="letter reveal">
+          <p>Seni kırdığım, üzdüğüm veya kendini yalnız hissettirdiğim anlar olduysa özür dilerim.</p>
+          <p>Her zaman doğru kelimeleri bulamasam da, seni önemsediğimden ve senin hep daha iyi olmanı istediğimden hiçbir zaman şüphen olmasın.</p>
+          <p>Çünkü sen benim için sıradan biri değilsin.</p>
+          <p class="love-line">BİRTANEM VE AŞKIMSIN.</p>
+          <footer>— Yağız</footer>
+        </article>
+        <button class="ghost next reveal" type="button">Devam et →</button>
+      </div>
+    </section>
+
+    <section class="scene" data-scene="wish">
+      <div class="content center">
+        <div class="candle reveal"><i></i><span></span></div>
+        <p class="eyebrow reveal">Şimdi bir dilek tut</p>
+        <h2 class="statement reveal">Ama sakın söyleme.<br><em>Gerçek olsun.</em></h2>
+        <button id="blowCandle" class="primary reveal" type="button">Mumu üfle <span>♡</span></button>
+      </div>
+    </section>
+
+    <section class="scene" data-scene="nineteen">
+      <div class="content center">
+        <div class="age reveal">19</div>
+        <p class="eyebrow reveal">Yeni yaşın</p>
+        <h2 class="statement reveal">Sana huzur, cesaret,<br>kahkaha ve çok güzel anılar getirsin.</h2>
+        <button class="ghost next reveal" type="button">Son bir şey →</button>
+      </div>
+    </section>
+
+    <section class="scene final-scene" data-scene="final">
+      <canvas id="finalConstellation" aria-hidden="true"></canvas>
+      <div class="content center">
+        <p class="eyebrow reveal">İyi ki doğdun</p>
+        <h2 class="final-title reveal">Seni seviyorum<br><em>Gabilim 🤍</em></h2>
+        <div class="photos reveal">
+          <div class="orbit orbit-left" aria-hidden="true"><span>♡</span><span>♡</span><span>♡</span></div>
+          <div class="orbit orbit-right" aria-hidden="true"><span>♡</span><span>♡</span><span>♡</span></div>
+          <figure><img src="assets/images/yagiz-cocukluk.jpeg" alt="Yağız'ın çocukluk fotoğrafı"><figcaption>Yağız</figcaption></figure>
+          <div class="heart-mark">♡</div>
+          <figure><img src="assets/images/isilay-cocukluk.jpeg" alt="Işılay'ın çocukluk fotoğrafı"><figcaption>Işılay</figcaption></figure>
+        </div>
+        <blockquote class="final-quote reveal">“Bence bizden çok güzel ikili olur.”</blockquote>
+        <p class="final-note reveal">İyi ki o gün aynı oyuna denk gelmişiz.</p>
+        <button id="replayBtn" class="primary reveal" type="button">Baştan izle <span>↻</span></button>
+      </div>
+    </section>
+
+    <nav class="scene-nav" aria-label="Hikâye kontrolleri">
+      <button id="prevBtn" type="button" aria-label="Önceki sahne">←</button>
+      <span id="sceneCounter">01 / 12</span>
+      <button id="nextBtn" type="button" aria-label="Sonraki sahne">→</button>
+    </nav>
+  </main>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true">
+      <button id="modalClose" class="modal-close" type="button" aria-label="Kapat">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+</body>
+</html>
