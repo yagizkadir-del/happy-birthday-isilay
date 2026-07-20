@@ -1,11 +1,13 @@
-Işılay Doğum Günü Sitesi — Kalp Şeridi Rötuşu
+Işılay Doğum Günü Sitesi — Premium Clean Build
 
-Bu sürümde:
-- Özür metni kullanıcının verdiği hâliyle düzeltildi.
-- “BİRTANEM VE AŞKIMSIN.” büyük ve pembe olarak eklendi.
-- Fiziksel kalpler geri getirildi.
-- Kalpler yer çekimiyle düşer, seker ve ekranın altında bir süre birikerek ince bir kalp şeridi oluşturur.
-- Kalp şeridi aşırı yoğunlaşmayacak şekilde sınırlandırıldı.
+Bu sürüm baştan, temiz ve GitHub Pages uyumlu şekilde yazıldı.
 
-GitHub:
-ZIP'i çıkarın. İçindeki index.html, css, js ve assets öğelerini repository köküne yükleyip Commit changes seçin.
+Dosyalar:
+- index.html
+- style.css
+- app.js
+- assets/images/
+- .nojekyll
+
+Ana konsept ve metinler korunmuştur.
+GitHub'a yüklerken ZIP'in içindeki dosyaları repository köküne yükleyin.
